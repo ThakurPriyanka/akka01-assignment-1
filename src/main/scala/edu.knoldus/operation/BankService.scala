@@ -17,7 +17,7 @@ class BankService(generatorAccount: ActorRef, depositeSalary: ActorRef) extends 
     override def postStop(): Unit = log.info("BankService Application stopped")
 
     // No need to handle any messages
-    override def receive = {
+    override def receive: Receive = {
     case NewAccount(account) => generatorAccount ! AddAccount(account)
     case UpdateAccount(userName, accountNumber, salary) => depositeSalary ! AddSalary(userName, accountNumber, salary)
   }

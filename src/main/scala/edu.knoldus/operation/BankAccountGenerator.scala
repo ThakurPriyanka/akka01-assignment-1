@@ -19,7 +19,7 @@ class BankAccountGenerator(accountList: Map[String, Account]) extends Actor with
     override def postStop(): Unit = log.info(s"BankAccountGenerator actor  stopped")
 
     override def receive: Receive = {
-      case  AddAccount(account)=> if(!accountList.contains(account.userName)) {
+      case  AddAccount(account)=> if (!accountList.contains(account.userName)) {
         accountList += account.userName -> account
       }
       else {

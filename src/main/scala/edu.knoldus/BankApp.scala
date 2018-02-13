@@ -13,10 +13,11 @@ object BankApp {
 
     try {
 
+      val salary1 = 12000
+      val salary2 = 12000
+      val account1 = Account("123", "priyanka",  "Priyanka", "Gtb nagar", salary1)
 
-      val account1 = Account("123", "priyanka",  "Priyanka", "Gtb nagar", 12000)
-
-      val account2 = Account("124", "priyank",  "Priyanka", "Gtb nagar", 12000)
+      val account2 = Account("124", "priyank",  "Priyanka", "Gtb nagar", salary2)
       val accountList = scala.collection.mutable.Map.empty[String, Account]
       val generator = system.actorOf(BankAccountGenerator.props(accountList), "Bank-account-generator")
       val salaryDepositor = system.actorOf(SalaryDepositeService.props(accountList), "Salary-Depositor")
@@ -29,7 +30,8 @@ object BankApp {
       val accountNumber = "123"
       val salary = 1000
       supervisor ! BankService.UpdateAccount(userName, accountNumber, salary)
-      Thread.sleep(10000)
+      val timeToSleep = 10000
+      Thread.sleep(timeToSleep)
       print(accountList)
       StdIn.readLine()
     } finally {

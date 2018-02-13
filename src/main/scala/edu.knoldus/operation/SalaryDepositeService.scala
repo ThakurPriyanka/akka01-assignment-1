@@ -21,8 +21,8 @@ class SalaryDepositeService(accountList: Map[String, Account]) extends Actor wit
   override def postStop(): Unit = log.info(s"Salary Depositor actor  stopped")
 
   override def receive: Receive = {
-    case AddSalary(userName, accountNumber, salary) => if(accountList.contains(userName)) {
-      if(accountList(userName).accountNumber == accountNumber) {
+    case AddSalary(userName, accountNumber, salary) => if (accountList.contains(userName)) {
+      if (accountList(userName).accountNumber == accountNumber) {
         val newAccount = accountOperation.addSalary(salary, accountList(userName))
         accountList(userName) = newAccount
       }
